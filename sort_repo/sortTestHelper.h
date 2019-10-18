@@ -7,6 +7,18 @@
 using namespace std;
 
 template<typename T>
+T* copyArray(T arr[], int n) {
+	if (arr == NULL || n <= 0)
+		return NULL;
+	T* ret = new T[n];
+	for (int i = 0; i < n; i++) {
+		ret[i] = arr[i];
+	}
+
+	return ret;
+}
+
+template<typename T>
 T* genNearlyOrderedArr(int n, int unorder_num) {
 	assert(n > 0);
 	T* arr = new T[n];
