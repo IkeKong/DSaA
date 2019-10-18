@@ -1,7 +1,7 @@
 #pragma once
 
 #include<iostream>
-#include<algorithm>
+#include "sortTestHelper.h"
 using namespace std;
 
 template<typename T>
@@ -19,17 +19,16 @@ void merge(T arr[], int left_idx, int mid, int right_idx) {
 	}
 
 	int n = right_idx - left_idx + 1;
-	int j = left_idx, k = mid + 1;
-
+	int j = 0, k = 0;
 	for (int i = 0; i < n; i++) {
-		if (j > mid)
-			arr[left_idx + i] = arr[k++];
-		else if (k > right_idx)
-			arr[left_idx + i] = arr[j++];
-		else if (arr[j] < arr[k])
-			arr[left_idx + i] = arr[j++];
+		if (j >= left_n)
+			arr[left_idx + i] = right_arr[k++];
+		else if (k >= right_n)
+			arr[left_idx + i] = left_arr[j++];
+		else if (left_arr[j] < right_arr[k])
+			arr[left_idx + i] = left_arr[j++];
 		else
-			arr[left_idx + i] = arr[k++];
+			arr[left_idx + i] = right_arr[k++];
 	}
 	delete[] left_arr;
 	delete[] right_arr;
@@ -44,7 +43,6 @@ void __Sort(T arr[], int left_idx, int right_idx) {
 
 	__Sort(arr, left_idx, mid);
 	__Sort(arr, mid + 1, right_idx);
-
 	merge(arr, left_idx, mid, right_idx);
 	return;
 }

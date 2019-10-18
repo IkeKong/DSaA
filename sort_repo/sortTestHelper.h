@@ -74,6 +74,7 @@ void testSort(T arr[], int n, string sort_name,void(*sortFunc)(T[], int)) {
 	clock_t start_time = clock();
 	sortFunc(arr, n);
 	clock_t end_time = clock();
+	// printArray(arr, n);
 	assert(isSorted(arr, n));
 
 	double seconds = double(end_time - start_time) / CLOCKS_PER_SEC;

@@ -1,5 +1,7 @@
 #pragma once
+#include <algorithm>
 #include "mergeSort1.h"
+using namespace std;
 
 template<typename T>
 void mergeSortBU(T arr[], int n) {
