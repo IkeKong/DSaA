@@ -88,8 +88,7 @@ void heapSort(T arr[], int n) {
 	MinHeap<T> data(arr, n);
 	for (int i = 0; i < n; i++) {
 		arr[i] = data.top();
-		data.pop();  
+		data.pop();
 	}
 	return;
-
 }

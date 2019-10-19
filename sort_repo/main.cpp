@@ -10,10 +10,9 @@
 using namespace std;
 
 int main() {
-	int n = 10000;
+	int n = 1000000;
 	int *arr = generateRandomArray<int>(n, 0, 100);
 	int* arr1 = copyArray<int>(arr, n);
-	printArray(arr, n);
 	
 	testSort(arr, n, "minHeap Sort", heapSort);
 	testSort(arr1, n, "quick Sort3ways", quickSort3Ways);
