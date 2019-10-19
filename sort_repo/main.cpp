@@ -15,8 +15,10 @@ int main() {
 	printArray(arr, n);
 	printArray(arr1, n);
 	
-	testSort(arr, n, "merget Sort", mergeSortUD);
-	testSort(arr1, n, "quick Sort", quickSortDirected);
+	testSort(arr, n, "quick Sort", quickSortBiDir);
+	printArray(arr, n);
+	testSort(arr1, n, "quick Sort3ways", quickSort3Ways);
+	printArray(arr, n);
 
 	int* arr2 = genNearlyOrderedArr<int>(n, 4);
 	int* arr3 = copyArray<int>(arr2, n);
