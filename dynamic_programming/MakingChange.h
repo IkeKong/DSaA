@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -24,17 +23,13 @@ int makeChange(const vector<int>& coins, int value) {
 	for (int j = 1; j <= value; j++) {
 		minNum = j + 1;
 		for (int i = 0; i < coins.size(); i++) {
-			if (j - coins[i] > 0) {
-				if (dp[j - coins[i]] != -1 && dp[j - coins[i]] + 1 < minNum) {	// value = j-coins[i] can make change 
-					minNum = dp[j - coins[i]] + 1;
+			if (j - coins[i] >= 0) {
+				if (dp[j - coins[i]] != -1) {	// value = j-coins[i] can make change 
+					minNum = min(dp[j - coins[i]] + 1, minNum);
 				}
 			}
-			else if (j - coins[i] == 0) {
-				minNum = 1;
-			}
-			else
-				continue;
 		}
+
 		if (minNum == j + 1)
 			minNum = -1;
 		dp[j] = minNum;
