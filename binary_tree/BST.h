@@ -50,7 +50,7 @@ public:
 		return contain(root, key);
 	}
 
-	Node* search(Key key) {
+	Value* search(Key key) {
 		return search(root, key);
 	}
 
@@ -59,8 +59,37 @@ public:
 	}
 
 	void seqTraversal() {
-
+		return seqTraversal(root);
 	}
+
+	void removeMin() {
+		if (root)
+			root = removeMin(root);
+	}
+
+	void removeMax() {
+		if (root)
+			root = removeMax(root);
+	}
+
+	void remove(Key key) {
+		root = remove(root, key);
+		return;
+	}
+
+	Key minimum() {
+		assert(count != 0);
+		Node* minNode = minimun(root);
+		return minNode->key;
+	}
+
+	Key maximum() {
+		assert(count != 0);
+		Node* maxNode = maximum(root);
+		return maxNode->key;
+	}
+
+
 
 private:
 	Node* insert(Node* node, Key key, Value value) {
@@ -162,4 +191,80 @@ private:
 		delete node;
 		count--;
 	}
+
+	Node* minimum(Node* node) {
+		if (node->left == NULL)
+			return node;
+		else
+			return minimum(node->left);
+	}
+
+	Node* maximum(Node* node) {
+		if (node->right == NULL)
+			return node;
+		return maximum(node->right);
+	}
+
+	Node* removeMin(Node* node) {
+		if (node->left == NULL) {
+			Node* rightNode = node->right;
+			delete node; 
+			count--;
+			return rightNode;
+		}
+		node->left = removeMin(node->left);
+		return node;
+	}
+
+	Node* removeMax(Node* node) {
+		if (node->right == NULL) {
+				Node* leftNode = node->left;
+				delete node;
+				count--;
+				return leftNode;
+		}
+		node->right = removeMax(node->right);
+		return node;
+	}
+
+	Node* remove(Node* node, Key key) {
+		if (node == NULL)
+			return NULL;
+		if (key < node->key) {
+			node->left = remove(node->left);
+			return node;
+		}
+		if (key > node->key) {
+			node->right = remove(node->right);
+			return node;
+		}
+		
+		if (node->left && node->right) {
+			Node* s = minimum(node->right);
+			Node* new_s = new Node(s->key, s->value);
+			count++;
+
+			Node* right = removeMin(node->right);
+			new_s->left = node->left;
+			new_s->right = right;
+	
+			delete node;
+			count--;
+			return new_s;
+		}
+		if (node->left == NULL) {
+			Node* right = node->right;
+			delete node;
+			count--;
+			return right;
+		}
+		if (node->right == NULL) {
+			Node* left = node->left;
+			delete node;
+			count--;
+			return left;
+		}
+
+	}
+
 };
