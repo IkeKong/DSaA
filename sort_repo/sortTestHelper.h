@@ -10,11 +10,9 @@ template<typename T>
 T* copyArray(T arr[], int n) {
 	if (arr == NULL || n <= 0)
 		return NULL;
-	T* ret = new T[n];
-	for (int i = 0; i < n; i++) {
-		ret[i] = arr[i];
-	}
 
+	T* ret = new T[n];
+	copy(arr, arr + n, ret);
 	return ret;
 }
 
@@ -39,7 +37,8 @@ T* genNearlyOrderedArr(int n, int unorder_num) {
 
 template<typename T>
 T* generateRandomArray(int n, int left, int right) {
-	assert(n > 0);
+	assert(n >= 0);
+	assert(right >= left);
 	srand(time(NULL));
 	T* arr = new T[n];
 
@@ -74,12 +73,10 @@ void testSort(T arr[], int n, string sort_name,void(*sortFunc)(T[], int)) {
 	clock_t start_time = clock();
 	sortFunc(arr, n);
 	clock_t end_time = clock();
-	// printArray(arr, n);
-	assert(isSorted(arr, n));
 
+	assert(isSorted(arr, n));
 	double seconds = double(end_time - start_time) / CLOCKS_PER_SEC;
 	cout << "using " << sort_name << " :" << seconds << " seconds." << endl;
-	// printArray(arr, n);
 	return;
 }
 

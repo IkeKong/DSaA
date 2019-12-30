@@ -6,16 +6,18 @@
 #include "quickSort.h"
 #include "MinHeap.h"
 #include "sortTestHelper.h"
+#include "BubbleSort.h"
+#include "ShellSort.h"
 
 using namespace std;
 
 int main() {
-	int n = 1000000;
+	int n = 1000;
 	int *arr = generateRandomArray<int>(n, 0, 100);
 	int* arr1 = copyArray<int>(arr, n);
 	
-	testSort(arr, n, "minHeap Sort", heapSort);
-	testSort(arr1, n, "quick Sort3ways", quickSort3Ways);
+	testSort(arr, n, "bubble Sort", bubbleSort);
+	testSort(arr1, n, "shell Sort", shellSort);
 
 	int* arr2 = genNearlyOrderedArr<int>(n, 4);
 	int* arr3 = copyArray<int>(arr2, n);

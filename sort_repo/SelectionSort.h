@@ -5,7 +5,7 @@ using namespace std;
 
 template<typename T>
 void selectionSort(T arr[], int n) {
-	if (arr == NULL)
+	if (arr == NULL || n <= 0)
 		return;
 
 	// [0, i) contains ordered nums
